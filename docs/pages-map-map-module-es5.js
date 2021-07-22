@@ -6369,7 +6369,7 @@
           this.selectedIss$ = this._store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["select"])(src_app_store_selectors_iss_selectors__WEBPACK_IMPORTED_MODULE_2__["selectSelectedISS"]));
           this.isShowPath = false;
           this.counter = 0;
-          this.fragment = '';
+          this.fragment = "";
           this.apiLoaded = this._mapService.sendGoogleAPI();
           this.issSubscription = this.iss$.subscribe(function (iss) {
             return _this36.updatePosition(iss);
@@ -6394,6 +6394,12 @@
                     longitude: +issTest.iss_position.longitude,
                     timestamp: issTest.timestamp
                   });
+                });
+              } else if (_this36.isMock()) {
+                _this36.updatePosition({
+                  latitude: 31.0461,
+                  longitude: 34.8516,
+                  timestamp: new Date().getTime()
                 });
               } else {
                 _this36._issService.getISS();
@@ -6454,7 +6460,12 @@
         }, {
           key: "isTest",
           value: function isTest() {
-            return this.fragment === 'test';
+            return this.fragment === "test";
+          }
+        }, {
+          key: "isMock",
+          value: function isMock() {
+            return this.fragment === "mock";
           }
         }]);
 

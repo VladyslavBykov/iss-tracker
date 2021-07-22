@@ -3664,7 +3664,7 @@ class MapComponent {
         this.selectedIss$ = this._store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["select"])(src_app_store_selectors_iss_selectors__WEBPACK_IMPORTED_MODULE_2__["selectSelectedISS"]));
         this.isShowPath = false;
         this.counter = 0;
-        this.fragment = '';
+        this.fragment = "";
         this.apiLoaded = this._mapService.sendGoogleAPI();
         this.issSubscription = this.iss$.subscribe((iss) => this.updatePosition(iss));
         this._route.fragment.subscribe((fragment) => {
@@ -3683,6 +3683,13 @@ class MapComponent {
                             longitude: +issTest.iss_position.longitude,
                             timestamp: issTest.timestamp,
                         });
+                    });
+                }
+                else if (this.isMock()) {
+                    this.updatePosition({
+                        latitude: 31.0461,
+                        longitude: 34.8516,
+                        timestamp: (new Date()).getTime(),
                     });
                 }
                 else {
@@ -3728,7 +3735,10 @@ class MapComponent {
         });
     }
     isTest() {
-        return this.fragment === 'test';
+        return this.fragment === "test";
+    }
+    isMock() {
+        return this.fragment === "mock";
     }
 }
 MapComponent.ɵfac = function MapComponent_Factory(t) { return new (t || MapComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["Store"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_services_map_service__WEBPACK_IMPORTED_MODULE_5__["MapService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_shared_services_iss_service__WEBPACK_IMPORTED_MODULE_6__["IssService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_app_config_module__WEBPACK_IMPORTED_MODULE_1__["APP_CONFIG"])); };

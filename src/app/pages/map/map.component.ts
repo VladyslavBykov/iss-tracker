@@ -4,27 +4,26 @@ import {
   OnDestroy,
   OnInit,
   ViewEncapsulation,
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { Observable, Subscription, timer } from 'rxjs';
-import { timeout } from 'rxjs/operators';
-import { AppConfig, APP_CONFIG } from 'src/app/app.config-module';
-import { IssService } from 'src/app/shared/services/iss.service';
+} from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { ActivatedRoute } from "@angular/router";
+import { select, Store } from "@ngrx/store";
+import { Observable, Subscription } from "rxjs";
+import { AppConfig, APP_CONFIG } from "src/app/app.config-module";
+import { IssService } from "src/app/shared/services/iss.service";
 import {
   selectISS,
   selectSelectedISS,
-} from 'src/app/store/selectors/iss.selectors';
-import { IAppState } from 'src/app/store/state/app.state';
-import { ISS } from 'src/app/types/iss.type';
-import { SaveDialogComponent } from './components/save-dialog/save-dialog.component';
-import { MapService } from './services/map.service';
+} from "src/app/store/selectors/iss.selectors";
+import { IAppState } from "src/app/store/state/app.state";
+import { ISS } from "src/app/types/iss.type";
+import { SaveDialogComponent } from "./components/save-dialog/save-dialog.component";
+import { MapService } from "./services/map.service";
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
+  selector: "app-map",
+  templateUrl: "./map.component.html",
+  styleUrls: ["./map.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class MapComponent implements OnInit, OnDestroy {
@@ -49,7 +48,7 @@ export class MapComponent implements OnInit, OnDestroy {
   isShowPath: boolean = false;
   counter: number = 0;
 
-  fragment: string = '';
+  fragment: string = "";
 
   constructor(
     private _store: Store<IAppState>,
@@ -78,6 +77,12 @@ export class MapComponent implements OnInit, OnDestroy {
               longitude: +issTest.iss_position.longitude,
               timestamp: issTest.timestamp,
             });
+          });
+        } else if (this.isMock()) {
+          this.updatePosition({
+            latitude: 31.0461,
+            longitude: 34.8516,
+            timestamp: (new Date()).getTime(),
           });
         } else {
           this._issService.getISS();
@@ -125,6 +130,10 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   isTest(): boolean {
-    return this.fragment === 'test';
+    return this.fragment === "test";
+  }
+
+  isMock(): boolean {
+    return this.fragment === "mock";
   }
 }
