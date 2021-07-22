@@ -1,19 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { interval, Observable, of, Subject } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { interval, Observable, of, Subject } from "rxjs";
 import {
   catchError,
   map,
   mergeMap,
   repeatWhen,
   takeUntil,
-} from 'rxjs/operators';
-import { AppConfig, APP_CONFIG } from 'src/app/app.config-module';
-import { GetIss } from 'src/app/store/actions/iss.action';
-import { IAppState } from 'src/app/store/state/app.state';
-import { ISS } from 'src/app/types/iss.type';
-import { LOCAL_STORAGE_ITEM } from '../enums/loca-storage.enum';
+} from "rxjs/operators";
+import { AppConfig, APP_CONFIG } from "src/app/app.config-module";
+import { GetIss } from "src/app/store/actions/iss.action";
+import { IAppState } from "src/app/store/state/app.state";
+import { ISS } from "src/app/types/iss.type";
+import { LOCAL_STORAGE_ITEM } from "../enums/loca-storage.enum";
 
 interface ISSHttp {
   iss_position: {
@@ -25,7 +25,7 @@ interface ISSHttp {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class IssService {
   private readonly _stop = new Subject<void>();
@@ -54,13 +54,13 @@ export class IssService {
 
   getISSOnce(): Observable<ISSHttp> {
     return this._httpClient
-      .get(this.config.iisApiUrl)
+      .jsonp(this.config.iisApiUrl, "callback")
       .pipe(map((iss: ISSHttp) => iss));
   }
 
   sendRequest(): Observable<ISSHttp> {
     return interval(2000).pipe(
-      mergeMap(() => this._httpClient.get(this.config.iisApiUrl)),
+      mergeMap(() => this._httpClient.jsonp(this.config.iisApiUrl, "callback")),
       takeUntil(this._stop),
       repeatWhen(() => this._start),
       catchError((e) => of(e))
@@ -95,6 +95,6 @@ export class IssService {
   }
 
   getFilter(): string {
-    return localStorage.getItem(LOCAL_STORAGE_ITEM.FILTER) || '';
+    return localStorage.getItem(LOCAL_STORAGE_ITEM.FILTER) || "";
   }
 }

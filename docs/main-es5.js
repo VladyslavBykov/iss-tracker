@@ -1031,7 +1031,7 @@
         }, {
           key: "getISSOnce",
           value: function getISSOnce() {
-            return this._httpClient.get(this.config.iisApiUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function (iss) {
+            return this._httpClient.jsonp(this.config.iisApiUrl, "callback").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function (iss) {
               return iss;
             }));
           }
@@ -1041,7 +1041,7 @@
             var _this4 = this;
 
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["interval"])(2000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["mergeMap"])(function () {
-              return _this4._httpClient.get(_this4.config.iisApiUrl);
+              return _this4._httpClient.jsonp(_this4.config.iisApiUrl, "callback");
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["takeUntil"])(this._stop), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["repeatWhen"])(function () {
               return _this4._start;
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["catchError"])(function (e) {
@@ -1081,7 +1081,7 @@
         }, {
           key: "getFilter",
           value: function getFilter() {
-            return localStorage.getItem(_enums_loca_storage_enum__WEBPACK_IMPORTED_MODULE_4__["LOCAL_STORAGE_ITEM"].FILTER) || '';
+            return localStorage.getItem(_enums_loca_storage_enum__WEBPACK_IMPORTED_MODULE_4__["LOCAL_STORAGE_ITEM"].FILTER) || "";
           }
         }]);
 
@@ -1095,7 +1095,7 @@
       IssService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({
         token: IssService,
         factory: IssService.ɵfac,
-        providedIn: 'root'
+        providedIn: "root"
       });
       /***/
     },

@@ -503,11 +503,11 @@ class IssService {
     }
     getISSOnce() {
         return this._httpClient
-            .get(this.config.iisApiUrl)
+            .jsonp(this.config.iisApiUrl, "callback")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((iss) => iss));
     }
     sendRequest() {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["interval"])(2000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["mergeMap"])(() => this._httpClient.get(this.config.iisApiUrl)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["takeUntil"])(this._stop), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["repeatWhen"])(() => this._start), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["catchError"])((e) => Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["of"])(e)));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["interval"])(2000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["mergeMap"])(() => this._httpClient.jsonp(this.config.iisApiUrl, "callback")), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["takeUntil"])(this._stop), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["repeatWhen"])(() => this._start), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["catchError"])((e) => Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["of"])(e)));
     }
     start() {
         this._start.next();
@@ -528,11 +528,11 @@ class IssService {
         localStorage.setItem(_enums_loca_storage_enum__WEBPACK_IMPORTED_MODULE_4__["LOCAL_STORAGE_ITEM"].FILTER, query);
     }
     getFilter() {
-        return localStorage.getItem(_enums_loca_storage_enum__WEBPACK_IMPORTED_MODULE_4__["LOCAL_STORAGE_ITEM"].FILTER) || '';
+        return localStorage.getItem(_enums_loca_storage_enum__WEBPACK_IMPORTED_MODULE_4__["LOCAL_STORAGE_ITEM"].FILTER) || "";
     }
 }
 IssService.ɵfac = function IssService_Factory(t) { return new (t || IssService)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_7__["Store"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](src_app_app_config_module__WEBPACK_IMPORTED_MODULE_2__["APP_CONFIG"])); };
-IssService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: IssService, factory: IssService.ɵfac, providedIn: 'root' });
+IssService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: IssService, factory: IssService.ɵfac, providedIn: "root" });
 
 
 /***/ }),
