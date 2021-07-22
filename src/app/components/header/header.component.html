@@ -1,0 +1,22 @@
+<div class="header">
+    <span class="header_title">IIS Tracker</span>
+    <span class="header_spacer"></span>
+    <div class="headear_info" *ngIf="iss$ | async">
+        <div class="header_column-left">
+            <h2>Current Location</h2>
+        </div>
+        <div class="header_column-right">
+            <div class="headear_info_block">
+                <span>Lat: {{getLatitude()}}</span>
+                <span>Lon: {{getLongitude()}}</span>
+            </div>
+            <span>Time: {{ getTimestamp() | date :'YYYY-LL-MM HH:MM:SS' }}</span>
+        </div>
+    </div>
+    <button mat-icon-button aria-label="Favorite" matTooltip="Favorite" (click)="favorite()">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Share" matTooltip="Share" (click)="share()">
+        <mat-icon>share</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,20 @@
+<div *ngIf="apiLoaded | async">
+    <div *ngIf="!marker" class="google-map_loader">
+        <mat-spinner></mat-spinner>
+    </div>
+    <google-map class="google-map" [center]="center" [zoom]="zoom">
+        <div *ngIf="isShowPath">
+            <map-marker *ngFor="let marker of markersList" [position]="marker.position" [icon]="marker.icon">
+            </map-marker>
+        </div>
+        <map-marker *ngIf="marker && !isShowPath" [position]="marker.position" [icon]="marker.icon"></map-marker>
+    </google-map>
+    <div class="google-map_path">
+        <mat-slide-toggle [(ngModel)]="isShowPath">Show Session Path</mat-slide-toggle>
+    </div>
+    <button *ngIf="marker" mat-mini-fab aria-label="Save ISS Position"
+        class="google-map_button_save-pos" (click)="savePosition()" matTooltip="Save ISS Position"
+        matTooltipPosition="above">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>

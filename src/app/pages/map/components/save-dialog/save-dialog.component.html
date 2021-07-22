@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Save ISS Position</h2>
+<mat-dialog-content class="mat-typography">
+    <p>International Space Station (<span>{{data.iss.timestamp | date: 'mediumTime'}}</span>) Current Location is:</p>
+    <div>Latitude: <strong>{{data.iss.latitude}}</strong></div>
+    <div>Longtude: <strong>{{data.iss.longitude}}</strong></div>
+    <br />
+    <p>Please, enter name to save the selected position.</p>
+    <mat-form-field appearance="outline">
+        <mat-label>Enter name</mat-label>
+        <input matInput [formControl]="name" required id="name">
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close id="save-dialog_cancel">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onSave()" id="save-dialog_save">Save</button>
+</mat-dialog-actions>

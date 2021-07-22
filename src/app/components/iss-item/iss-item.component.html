@@ -1,0 +1,13 @@
+<div class="iss-item_card" [matTooltip]="getTooltipMessage()" (click)="select()" [class.active]="this.isSelected()">
+    <mat-icon click-stop-propagation aria-hidden="false" class="iss-item_button_remove" aria-label="Remove"
+        matTooltip="Remove" (click)="remove()">close</mat-icon>
+    <strong class="iss-item_name">{{iss.name}}</strong>
+    <br />
+    <div class="iss-item_position">
+        <strong>Lat: </strong>
+        <span>{{iss.latitude}}</span>
+        <strong>Lon: </strong>
+        <span>{{iss.longitude}}</span>
+    </div>
+    <strong>Date: </strong><span>{{iss.timestamp | date :'YYYY-LL-MM HH:MM:SS'}}</span>
+</div>

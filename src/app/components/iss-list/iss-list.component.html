@@ -1,0 +1,5 @@
+<h4><strong>Saved Locations</strong></h4>
+<div class="scrollable_container">
+    <p *ngIf="(issList$ | async).length === 0">You don't have saved location</p>
+    <app-iss-item *ngFor="let iss of issList$ | async" [iss]="iss" (onRemove)="onRemoveHandler($event)"></app-iss-item>
+</div>
